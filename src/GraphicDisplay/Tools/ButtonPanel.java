@@ -155,6 +155,8 @@ public class ButtonPanel extends JPanel {
             newShape = new Mandelbrot();
         } else if (index == 5){
             newShape = new Julia();
+        } else if (index == 6){
+            newShape = new DeRhamCurve();
         }
 
         this.dcomponent.isVisible = false;

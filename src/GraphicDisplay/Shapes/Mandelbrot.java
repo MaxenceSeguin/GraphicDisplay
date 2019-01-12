@@ -12,7 +12,7 @@ import static java.lang.Math.*;
 
 public class Mandelbrot extends Shape {
 
-    private int iteration; //TODO Implement modulo for better visuals on the colors
+    private int iteration;
     private double ix1 = -4, iy1=-4, ix2=6, iy2=6, di = 0.1, d = 0.1;
     public Parameter delta = new Parameter(1, 0, 1, "Delta");
     public Parameter maxIteration = new Parameter(2, 60, 10, "Max iterations");

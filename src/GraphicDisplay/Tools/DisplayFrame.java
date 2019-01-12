@@ -26,7 +26,8 @@ public class DisplayFrame extends JFrame {
  * Then we build and add to the frame the combo box that will allow us to chose which shape we want to work with.
  * This combo box will always appear first in the option list.
  */
-        JComboBox list = new JComboBox<>(new String[]{"Koch Flake", "Quadratic Koch", "Satellite", "Dragon", "Mandelbrot", "Julia"});
+        JComboBox list = new JComboBox<>(new String[]{"Koch Flake", "Quadratic Koch", "Satellite", "Dragon",
+                "Mandelbrot", "Julia", "De Rham curve"});
         list.setFocusable(false);
 
         ActionListener aListener = new ActionListener() {
