@@ -10,8 +10,11 @@ import java.util.ArrayList;
 
 public class ButtonPanel extends JPanel {
 
+    /** The list of button we want to display **/
     private ArrayList<JButton> buttons = new ArrayList<>();
+    /** The keylistener to move the shape around and to zoom it in **/
     private KeyListener kListener;
+    /** The display component we are working with **/
     public DisplayComponent dcomponent;
 
     public ButtonPanel(DisplayComponent component) {
@@ -20,6 +23,10 @@ public class ButtonPanel extends JPanel {
         construct(component);
     }
 
+    /**
+     * Build this panel. Create the buttons, link them to their according listener etc.
+     * @param component
+     */
     private void construct (DisplayComponent component){
         this.dcomponent = component;
         createKeyControllers();
@@ -27,6 +34,9 @@ public class ButtonPanel extends JPanel {
         displayButtons();
     }
 
+    /**
+     * Adds the KeyListener kListener to all the component of the pane.
+     */
     private void createKeyControllers(){
         this.removeKeyListener(kListener);
         dcomponent.removeKeyListener(kListener);
@@ -78,6 +88,11 @@ public class ButtonPanel extends JPanel {
         }
     }
 
+    /**
+     * Creates all the button needed - according to the shape linked to this panel.
+     * Also creates the mouse wheel listener for each of those.
+     * Finally adds those buttons to the Arraylist so that we can cast them later in the frame.
+     */
     private void createButtons() {
 
         Shape shape = dcomponent.shape;
@@ -107,6 +122,9 @@ public class ButtonPanel extends JPanel {
         }
     }
 
+    /**
+     * Displays all the buttons from the button Arraylist in this panel.
+     */
     private void displayButtons(){
 
         for (JButton button : buttons){
@@ -117,6 +135,12 @@ public class ButtonPanel extends JPanel {
         this.revalidate();
     }
 
+    /**
+     * This method is called when the combo box is used.
+     * THis will change the shape we are displaying in the frame.
+     * Therefore we need to rebuild all the buttons according to this new shape.
+     * @param index index of the shape we want.
+     */
     public void reset(int index){
 
         Shape newShape = new KochFlake();
