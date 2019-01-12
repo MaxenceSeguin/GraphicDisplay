@@ -133,6 +133,7 @@ public class ButtonPanel extends JPanel {
             newShape = new Julia();
         }
 
+        this.dcomponent.isVisible = false;
         this.dcomponent = new DisplayComponent(newShape);
 
         construct(this.dcomponent);

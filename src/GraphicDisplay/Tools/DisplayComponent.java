@@ -8,6 +8,7 @@ import java.awt.*;
 public class DisplayComponent extends JComponent {
 
     public GraphicDisplay.Shapes.Shape shape;
+    public boolean isVisible = true;
 
     public DisplayComponent(Shape shape) {
         super();
@@ -24,6 +25,7 @@ public class DisplayComponent extends JComponent {
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
                 RenderingHints.VALUE_ANTIALIAS_ON);
 
+        if (isVisible)
         shape.render(g2);
 
     }

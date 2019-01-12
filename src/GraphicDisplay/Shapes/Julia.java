@@ -7,7 +7,6 @@ import java.awt.*;
 import java.awt.geom.Line2D;
 
 import static java.lang.Math.abs;
-import static java.lang.Math.max;
 import static java.lang.Math.pow;
 
 public class Julia extends Shape{
