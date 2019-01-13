@@ -4,6 +4,7 @@ import GraphicDisplay.Shapes.Shape;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
 
 public class DisplayComponent extends JComponent {
 

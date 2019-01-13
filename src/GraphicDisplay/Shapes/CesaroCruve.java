@@ -4,8 +4,10 @@ import GraphicDisplay.Tools.Complex;
 import GraphicDisplay.Tools.Parameter;
 
 import java.awt.*;
+import java.awt.geom.Ellipse2D;
 import java.awt.geom.Line2D;
 import java.awt.image.AreaAveragingScaleFilter;
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -13,15 +15,15 @@ import static java.lang.Math.max;
 import static java.lang.Math.min;
 import static java.lang.Math.pow;
 
-public class DeRhamCurve extends Shape {
+public class CesaroCruve extends Shape {
 
     Parameter n = new Parameter(1, 1, 1, "Number of steps");
     Parameter ax = new Parameter(2, (float)0.5, 0.001, "Affine parameter real part");
     Parameter ay = new Parameter(3, (float)0.5, 0.001, "Affine parameter imaginary part");
     Complex a = new Complex(ax.value, ay.value);
 
-    public DeRhamCurve(){
-        coordinates = new double[]{0, 0};
+    public CesaroCruve(){
+        coordinates = new double[]{400, 600};
     }
 
     /**
@@ -30,15 +32,24 @@ public class DeRhamCurve extends Shape {
      */
     private void drawComplex(ArrayList<Complex> points){
         Line2D l = new Line2D.Double(0, 0, 0, 0);
+        Ellipse2D e = new Ellipse2D.Double(0,0,0,0);
         double d = 0.0001;
         int ind = 0;
-        float unit = (float)1/points.size();
-        Color c = new Color(255, 69, 19);
+        int size = points.size();
+        Color c = new Color(4, 255, 255);
+        Color k = new Color(255,0, 240);
+        float kr = (float)k.getRed()/255;
+        float kg = (float)k.getGreen()/255;
+        float kb = (float)k.getBlue()/255;
+        float dr = (float)(c.getRed()-k.getRed())/size/255;
+        float dg = (float)(c.getGreen()-k.getGreen())/size/255;
+        float db = (float)(c.getBlue()-k.getBlue())/size/255;
         for (Complex z : points){
             double re = z.re(); double im = z.im();
-            l.setLine(re, -im, re + d, -im);
-            g2.setColor(new Color(min(unit*ind, 1), 0, min(ind*unit, 1)));
-            g2.draw(l);
+            //l.setLine(re, -im, re + d, -im);
+            e.setFrame(re, -im, 0.001, 0.001);
+                g2.setColor(new Color(kr+ind*dr, kg+ind*dg, kb+ind*db));
+            g2.fill(e);
             ind++;
         }
     }
@@ -134,6 +145,7 @@ public class DeRhamCurve extends Shape {
 
     @Override
     protected void drawShape() {
+        System.out.println("Processing");
         g2.scale(600, 600);
         g2.setStroke(new BasicStroke((float)0.001));
         a.set(ax.value, ay.value);
@@ -150,6 +162,7 @@ public class DeRhamCurve extends Shape {
         ArrayList<Complex> finalSequence = IFSresult2(z1);
 
         drawComplex(finalSequence);
+        System.out.println("Done");
 
     }
 

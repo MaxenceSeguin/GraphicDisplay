@@ -27,7 +27,7 @@ public class DisplayFrame extends JFrame {
  * This combo box will always appear first in the option list.
  */
         JComboBox list = new JComboBox<>(new String[]{"Koch Flake", "Quadratic Koch", "Satellite", "Dragon",
-                "Mandelbrot", "Julia", "De Rham curve"});
+                "Mandelbrot", "Julia", "Cesàro curve"});
         list.setFocusable(false);
 
         ActionListener aListener = new ActionListener() {
