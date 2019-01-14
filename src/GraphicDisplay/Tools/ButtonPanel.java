@@ -145,18 +145,14 @@ public class ButtonPanel extends JPanel {
 
         Shape newShape = new KochFlake();
 
-        if (index == 1){
-            newShape = new QuadraticKoch();
-        } else if (index == 2){
-            newShape = new Satellite();
-        } else if (index == 3){
-            newShape = new DragonCurve();
-        } else if (index == 4){
-            newShape = new Mandelbrot();
-        } else if (index == 5){
-            newShape = new Julia();
-        } else if (index == 6){
-            newShape = new CesaroCruve();
+        switch (index) {
+            case 1 : newShape = new QuadraticKoch(); break;
+            case 2 : newShape = new Satellite(); break;
+            case 3 : newShape = new DragonCurve(); break;
+            case 4 : newShape = new Mandelbrot(); break;
+            case 5 : newShape = new Julia(); break;
+            case 6 : newShape = new CesaroCruve(); break;
+            case 7 : newShape = new AffineDeRhamCurve(); break;
         }
 
         this.dcomponent.isVisible = false;

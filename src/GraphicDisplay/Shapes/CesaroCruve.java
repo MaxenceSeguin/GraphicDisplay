@@ -6,21 +6,15 @@ import GraphicDisplay.Tools.Parameter;
 import java.awt.*;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Line2D;
-import java.awt.image.AreaAveragingScaleFilter;
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.Random;
 
-import static java.lang.Math.max;
-import static java.lang.Math.min;
-import static java.lang.Math.pow;
-
 public class CesaroCruve extends Shape {
 
-    Parameter n = new Parameter(1, 1, 1, "Number of steps");
-    Parameter ax = new Parameter(2, (float)0.5, 0.001, "Affine parameter real part");
-    Parameter ay = new Parameter(3, (float)0.5, 0.001, "Affine parameter imaginary part");
-    Complex a = new Complex(ax.value, ay.value);
+    public Parameter n = new Parameter(1, 1, 1, "Number of steps");
+    private Parameter ax = new Parameter(2, (float)0.5, 0.001, "Affine parameter real part");
+    private Parameter ay = new Parameter(3, (float)0.5, 0.001, "Affine parameter imaginary part");
+    private Complex a = new Complex(ax.value, ay.value);
 
     public CesaroCruve(){
         coordinates = new double[]{400, 600};
@@ -46,12 +40,22 @@ public class CesaroCruve extends Shape {
         float db = (float)(c.getBlue()-k.getBlue())/size/255;
         for (Complex z : points){
             double re = z.re(); double im = z.im();
-            //l.setLine(re, -im, re + d, -im);
             e.setFrame(re, -im, 0.001, 0.001);
                 g2.setColor(new Color(kr+ind*dr, kg+ind*dg, kb+ind*db));
             g2.fill(e);
             ind++;
         }
+    }
+
+
+    @Override
+    protected void saveImageToBufferedImage(Graphics2D g2d) {
+
+        float f = this.n.value;
+        this.n.value = 16;
+        super.saveImageToBufferedImage(g2d);
+        this.n.value = f;
+
     }
 
     /**
@@ -145,19 +149,14 @@ public class CesaroCruve extends Shape {
 
     @Override
     protected void drawShape() {
-        System.out.println("Processing");
+        System.out.println("Processing : " + n.value);
         g2.scale(600, 600);
         g2.setStroke(new BasicStroke((float)0.001));
         a.set(ax.value, ay.value);
         g2.setColor(Color.BLACK);
         g2.fillRect(-10, -10, 20, 20);
 
-        Complex z1 = new Complex(0.4, 0.3);
-        Complex z2 = new Complex(0.4, 0.7);
-        Complex z3 = new Complex(0.6, 0.3);
-        Complex z4 = new Complex(0.6, 0.7);
-        ArrayList<Complex> zList = new ArrayList<>();
-        zList.add(z1);zList.add(z2);zList.add(z3);zList.add(z4);
+        Complex z1 = new Complex(0.5, 0.5);
 
         ArrayList<Complex> finalSequence = IFSresult2(z1);
 

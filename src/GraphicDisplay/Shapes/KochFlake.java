@@ -76,6 +76,10 @@ public class KochFlake extends Shape {
     }
 
     protected void drawShape(){
+
+        g2.setColor(Color.MAGENTA);
+        g2.drawLine(0,0,1000,1000);
         koch(g2,n.value);
+        g2.drawLine(0,0,1000,1000);
     }
 }

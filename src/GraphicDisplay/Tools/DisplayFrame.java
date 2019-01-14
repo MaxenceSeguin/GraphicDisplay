@@ -4,10 +4,14 @@
 
 package GraphicDisplay.Tools;
 
+import GraphicDisplay.Shapes.CesaroCruve;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 public class DisplayFrame extends JFrame {
 
@@ -27,7 +31,7 @@ public class DisplayFrame extends JFrame {
  * This combo box will always appear first in the option list.
  */
         JComboBox list = new JComboBox<>(new String[]{"Koch Flake", "Quadratic Koch", "Satellite", "Dragon",
-                "Mandelbrot", "Julia", "Cesàro curve"});
+                "Mandelbrot", "Julia", "Cesàro curve", "Affine de Rham curve"});
         list.setFocusable(false);
 
         ActionListener aListener = new ActionListener() {
@@ -41,8 +45,41 @@ public class DisplayFrame extends JFrame {
         };
         list.addActionListener(aListener);
 
+        JButton saveButton = new JButton("Save Image");
+        MouseListener mListener = new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                String name = JOptionPane.showInputDialog(panel.getParent(),
+                        "Name of the file", null);
+                if (name != null) {
+                    panel.dcomponent.shape.save(name);
+                }
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+
+            }
+        };
+        saveButton.addMouseListener(mListener);
 
         panel.add(list, 0);
+        panel.add(saveButton, 1);
 
 /**
  * Finally we set the frame up, with all the options wanted, and launch it.
